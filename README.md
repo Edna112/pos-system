@@ -8,7 +8,6 @@ A robust Inventory Management System built with **Laravel 10** and **MySQL**, de
 
 The system is structured using a clear and efficient database schema:
 
-![Database Diagram](https://github.com/Edna112/pos-system/assets/71541409/0c7d4163-96f5-4724-8741-4615e52ecf98)
 
 ## 🌟 Key Features
 
@@ -179,17 +178,7 @@ User::create([
 ]);
 ```
 
-## 🔧 Configuration
 
-### Configuring Cart Settings:
 
--   To customize tax rates, number formatting, and more, open `./config/cart.php`.
--   For more details, check out the [hardevine/shoppingcart](https://packagist.org/packages/hardevine/shoppingcart) package.
 
-## 💡 Contributing
-
-Have ideas to improve the system? Feel free to:
-
--   Submit a **Pull Request (PR)**
--   Create an **Issue** for feature requests or bugs
 
