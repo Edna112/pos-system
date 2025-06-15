@@ -32,7 +32,9 @@ class UnitSeeder extends Seeder
         ]);
 
         $units->each(function ($unit){
-            Unit::insert($unit);
+            Unit::updateOrInsert([
+                'slug' => $unit['slug']
+            ], $unit);
         });
     }
 }

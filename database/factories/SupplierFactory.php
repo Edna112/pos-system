@@ -20,13 +20,17 @@ class SupplierFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->unique()->phoneNumber(),
+            'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'shopname' => fake()->company(),
-            'type' => fake()->randomElement(SupplierType::cases()),
+            'type' => fake()->randomElement([
+                SupplierType::DISTRIBUTOR->value,
+                SupplierType::WHOLESALER->value,
+                SupplierType::PRODUCER->value
+            ]),
             'account_holder' => fake()->name(),
-            'account_number' => fake()->randomNumber(8, true),
-            'bank_name' => fake()->randomElement(['BRI', 'BNI', 'BCA', 'BSI', 'Mandiri']),
+            'account_number' => fake()->numerify('########'),
+            'bank_name' => fake()->randomElement(['Mandiri', 'BCA', 'BNI', 'BRI']),
         ];
     }
 }

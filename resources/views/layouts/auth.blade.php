@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @import url('https://rsms.me/inter/inter.css');
         :root {

@@ -135,7 +135,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title text-center mx-auto" id="modalCenterTitle">Invoice of {{ $customer->name }}<br/>Total Amount ${{ Cart::total() }}</h3>
+                    <h3 class="modal-title text-center mx-auto" id="modalCenterTitle">Invoice of {{ $customer->name }}<br/>Total Amount {{ Number::currency(Cart::total(), 'XAF') }}</h3>
                 </div>
 
                 <form action="{{ route('orders.store') }}" method="POST">
@@ -148,9 +148,9 @@
                                 <label class="small mb-1" for="payment_type">Payment <span class="text-danger">*</span></label>
                                 <select class="form-control @error('payment_type') is-invalid @enderror" id="payment_type" name="payment_type">
                                     <option selected="" disabled="">Select a payment:</option>
-                                    <option value="HandCash">HandCash</option>
-                                    <option value="Cheque">Cheque</option>
-                                    <option value="Due">Due</option>
+                                    <option value="MTN Mobile Money">MTN Mobile Money</option>
+                                    <option value="Orange MoMo">Orange MoMo</option>
+                                    <option value="Cash In Hand">Cash In Hand</option>
                                 </select>
                                 @error('payment_type')
                                 <div class="invalid-feedback">

@@ -85,7 +85,9 @@ class ProductSeeder extends Seeder
         ]);
 
         $products->each(function ($product){
-            Product::create($product);
+            Product::updateOrInsert([
+                'slug' => $product['slug']
+            ], $product);
         });
     }
 }

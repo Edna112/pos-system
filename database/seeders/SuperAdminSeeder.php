@@ -27,5 +27,10 @@ class SuperAdminSeeder extends Seeder
                 'updated_at' => now(),
             ]
         );
+
+        $user = \App\Models\User::where('email', 'edna@superu.com')->first();
+        if ($user) {
+            $user->assignRole('Administrator');
+        }
     }
 } 

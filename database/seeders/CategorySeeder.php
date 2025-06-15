@@ -47,7 +47,9 @@ class CategorySeeder extends Seeder
         ]);
 
         $categories->each(function ($category){
-            Category::insert($category);
+            Category::updateOrInsert([
+                'id' => $category['id']
+            ], $category);
         });
     }
 }

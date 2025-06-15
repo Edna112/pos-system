@@ -19,31 +19,35 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-                //UserSeeder::class,
+            RolesAndPermissionsSeeder::class,
             CategorySeeder::class,
             UnitSeeder::class,
             ProductSeeder::class,
             SuperAdminSeeder::class,
+            UserSeeder::class,
         ]);
 
+        // Create orders first
         $orders = Order::factory(50)->create();
+        
+        // Create customers with orders
         $customers = Customer::factory(30)
             ->recycle($orders)
             ->create();
 
-
-        $purchases = Purchase::factory(60)->create();
+        // Create suppliers first
         $suppliers = Supplier::factory(20)->create();
+        
+        // Create purchases with suppliers
+        $purchases = Purchase::factory(60)
+            ->recycle($suppliers)
+            ->create();
 
-        $users = User::factory(10)
+        // Create users last
+        User::factory(10)
             ->recycle($suppliers)
             ->recycle($purchases)
             ->create();
-
-        $admin = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com'
-        ]);
 
         /*
         for ($i=0; $i < 10; $i++) {
