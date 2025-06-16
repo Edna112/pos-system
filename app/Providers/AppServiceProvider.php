@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
-        URL::forceScheme('https');
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
         Paginator::useBootstrapFive();
 
         Request::macro('breadcrumbs', function (){
