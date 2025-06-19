@@ -1,5 +1,11 @@
+# Add DNS configuration
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
+RUN echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+
 # Stage 1: Node build for frontend assets
-FROM node:18-alpine as node-build
+FROM node:18-alpine AS node-build
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,7 +13,9 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Composer build for PHP dependencies (use PHP image, not composer image)
-FROM php:8.2-fpm-alpine as composer-build
+FROM php:8.2-fpm-alpine AS composer-build
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 WORKDIR /app
 
 # Install PHP extensions needed for composer install
@@ -35,6 +43,8 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Stage 3: Production image
 FROM php:8.2-fpm-alpine
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 WORKDIR /var/www/html
 
 # Install PHP extensions and system dependencies
@@ -60,8 +70,8 @@ COPY --from=node-build /app/public/build ./public/build
 
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-RUN php artisan config:clear && php artisan cache:clear && php artisan view:clear
+RUN php artisan optimize:clear
 
 EXPOSE 8000
 
-CMD php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000"]

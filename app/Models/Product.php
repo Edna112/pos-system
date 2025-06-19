@@ -14,22 +14,19 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    public $fillable = [
+    protected $fillable = [
         'name',
-        'slug',
+        'status',
         'code',
-        'quantity',
-        'quantity_alert',
-        'buying_price',
-        'selling_price',
-        'tax',
-        'tax_type',
-        'notes',
-        'product_image',
         'category_id',
         'unit_id',
-        'created_at',
-        'updated_at'
+        'product_image',
+        'stock',
+        'buying_price',
+        'selling_price',
+        'supplier_id',
+        'buying_date',
+        'quantity'
     ];
 
     protected $casts = [

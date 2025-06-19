@@ -12,8 +12,11 @@
                         <span class="text-muted fw-medium">Total Sales</span>
                         <span class="bg-purple-lt text-purple rounded-circle p-2"><i class="ti ti-credit-card"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $totalSales ?? 'FCFA 0' }}</div>
-                    <div class="text-success small fw-semibold">100% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ Number::currency($totalSales ?? 0, 'XAF') }}</div>
+                    <div class="small fw-semibold {{ $salesGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($salesGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $salesGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,8 +27,11 @@
                         <span class="text-muted fw-medium">Orders</span>
                         <span class="bg-purple-lt text-purple rounded-circle p-2"><i class="ti ti-shopping-cart"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $orders ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ $orders ?? 0 }}</div>
+                    <div class="small fw-semibold {{ $ordersGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($ordersGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $ordersGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,8 +42,11 @@
                         <span class="text-muted fw-medium">Total Products</span>
                         <span class="bg-purple-lt text-purple rounded-circle p-2"><i class="ti ti-box"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $totalProducts ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ $products ?? 0 }}</div>
+                    <div class="small fw-semibold {{ $productsGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($productsGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $productsGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,8 +57,10 @@
                         <span class="text-muted fw-medium">Top Selling Products</span>
                         <span class="bg-purple-lt text-purple rounded-circle p-2"><i class="ti ti-star"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $topSellingProducts ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ $topSellingProducts ?? 0 }}</div>
+                    <div class="small fw-semibold text-muted">
+                        Top performers this month
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,8 +74,11 @@
                         <span class="text-muted fw-medium">Total Expenses</span>
                         <span class="bg-red-lt text-danger rounded-circle p-2"><i class="ti ti-arrow-down"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $totalExpenses ?? '0' }}</div>
-                    <div class="text-danger small fw-semibold">0% <i class="ti ti-arrow-down"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ Number::currency($totalExpenses ?? 0, 'XAF') }}</div>
+                    <div class="small fw-semibold {{ $expensesGrowth >= 0 ? 'text-danger' : 'text-success' }}">
+                        {{ number_format(abs($expensesGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $expensesGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,8 +89,11 @@
                         <span class="text-muted fw-medium">Total Revenue</span>
                         <span class="bg-green-lt text-success rounded-circle p-2"><i class="ti ti-currency-dollar"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $totalRevenue ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ Number::currency($totalRevenue ?? 0, 'XAF') }}</div>
+                    <div class="small fw-semibold {{ $revenueGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($revenueGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $revenueGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,8 +104,11 @@
                         <span class="text-muted fw-medium">Average Sale</span>
                         <span class="bg-blue-lt text-primary rounded-circle p-2"><i class="ti ti-chart-bar"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $averageSale ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ Number::currency($averageSale ?? 0, 'XAF') }}</div>
+                    <div class="small fw-semibold {{ $averageSaleGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($averageSaleGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $averageSaleGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,8 +119,11 @@
                         <span class="text-muted fw-medium">Total Customers</span>
                         <span class="bg-yellow-lt text-warning rounded-circle p-2"><i class="ti ti-users"></i></span>
                     </div>
-                    <div class="fw-bold display-6 mb-1">{{ $totalCustomers ?? '0' }}</div>
-                    <div class="text-success small fw-semibold">0% <i class="ti ti-arrow-up"></i> from last month</div>
+                    <div class="fw-bold display-6 mb-1">{{ $totalCustomers ?? 0 }}</div>
+                    <div class="small fw-semibold {{ $customersGrowth >= 0 ? 'text-success' : 'text-danger' }}">
+                        {{ number_format(abs($customersGrowth), 1) }}% 
+                        <i class="ti ti-arrow-{{ $customersGrowth >= 0 ? 'up' : 'down' }}"></i> from last month
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,27 +131,25 @@
     <div class="row g-3 mb-3">
         <!-- Middle Row: Charts -->
         <div class="col-md-6">
-            <x-card.index title="Product Analysis">
+            <x-card.index title="Product Categories">
                 <div id="pieChart" style="height: 250px;"></div>
                 <div class="text-center mt-2 small">
-                    <span class="me-2"><span class="badge bg-primary"></span> Click</span>
-                    <span class="me-2"><span class="badge bg-success"></span> Active</span>
-                    <span class="me-2"><span class="badge bg-warning"></span> Not Recognized</span>
-                    <span class="me-2"><span class="badge bg-danger"></span> Bot Activity</span>
+                    @foreach($productCategoryData['labels'] as $index => $label)
+                        <span class="me-2">
+                            <span class="badge bg-{{ ['primary', 'success', 'warning', 'danger', 'info', 'secondary'][$index % 6] }}"></span> 
+                            {{ $label }}
+                        </span>
+                    @endforeach
                 </div>
             </x-card.index>
         </div>
         <div class="col-md-6">
-            <x-card.index title="Shopping Status">
+            <x-card.index title="Daily Sales Trend">
                 <div id="lineChart" style="height: 250px;"></div>
                 <div class="text-center mt-2 small">
-                    <span class="me-2">Mon</span>
-                    <span class="me-2">Tue</span>
-                    <span class="me-2">Wed</span>
-                    <span class="me-2">Thu</span>
-                    <span class="me-2">Fri</span>
-                    <span class="me-2">Sat</span>
-                    <span class="me-2">Sun</span>
+                    @foreach($dailySalesData['labels'] as $day)
+                        <span class="me-2">{{ $day }}</span>
+                    @endforeach
                 </div>
             </x-card.index>
         </div>
@@ -143,8 +164,8 @@
                         <button class="btn btn-sm btn-outline-secondary">Year</button>
                     </div>
                     <div>
-                        <div class="me-3">Revenue: <strong>FCFA 12,345</strong></div>
-                        <div>Expenses: <strong>FCFA 6,789</strong></div>
+                        <div class="me-3">Revenue: <strong>{{ Number::currency($totalRevenue ?? 0, 'XAF') }}</strong></div>
+                        <div>Expenses: <strong>{{ Number::currency($totalExpenses ?? 0, 'XAF') }}</strong></div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -189,28 +210,48 @@
 <script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Pie Chart
+        // Pie Chart for Product Categories
         var pieOptions = {
             chart: { type: 'pie', height: 250 },
-            labels: ['Click', 'Active', 'Not Recognized', 'Bot Activity'],
-            series: [35, 45, 10, 10],
-            colors: ['#206bc4', '#28a745', '#ffc107', '#dc3545'],
+            labels: @json($productCategoryData['labels']),
+            series: @json($productCategoryData['data']),
+            colors: ['#206bc4', '#28a745', '#ffc107', '#dc3545', '#0dcaf0', '#6c757d'],
             legend: { position: 'bottom' },
         };
         var pieChart = new ApexCharts(document.querySelector('#pieChart'), pieOptions);
         pieChart.render();
 
-        // Line Chart
+        // Line Chart for Daily Sales
         var lineOptions = {
-            chart: { type: 'line', height: 250 },
+            chart: { 
+                type: 'line',
+                height: 250,
+                toolbar: {
+                    show: false
+                }
+            },
             series: [{
-                name: 'Shopping Status',
-                data: [10, 20, 15, 30, 25, 40, 35]
+                name: 'Daily Sales',
+                data: @json($dailySalesData['data'])
             }],
             xaxis: {
-                categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                categories: @json($dailySalesData['labels'])
             },
             colors: ['#206bc4'],
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+            markers: {
+                size: 4
+            },
+            tooltip: {
+                y: {
+                    formatter: function(value) {
+                        return 'FCFA ' + value.toLocaleString()
+                    }
+                }
+            }
         };
         var lineChart = new ApexCharts(document.querySelector('#lineChart'), lineOptions);
         lineChart.render();
