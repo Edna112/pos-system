@@ -18,11 +18,24 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
+        /* Sidebar red hover */
+        .sidebar-menu-custom .nav-link:hover, .sidebar-menu-custom .dropdown-item:hover {
+            background: #4169E1 !important;
+            color: #fff !important;
+        }
+        .sidebar-menu-custom .nav-link:hover i,
+        .sidebar-menu-custom .dropdown-item:hover i {
+            color: #fff !important;
+        }
     </style>
 
     <!-- Custom CSS for specific page.  -->
     @stack('page-styles')
     @livewireStyles
+
+    <!-- Tabler Icons CDN -->
+    <script src="https://kit.fontawesome.com/bdd56f4c49.js" crossorigin="anonymous"></script>
+    <!--<link href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css" rel="stylesheet">-->
 </head>
     <body>
 
@@ -34,58 +47,78 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Sidebar -->
-                        <div class="col-md-2 bg-white min-vh-100 px-0 border-end sidebar-menu-custom">
+                        <div class="col-md-2 d-none d-md-block bg-info min-vh-100 px-0 border-end sidebar-menu-custom" style="background: #f2f3f5;">
                             <nav class="nav flex-column nav-pills gap-1 pt-4">
-                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                                    <i class="ti ti-home me-3 fs-5"></i> Dashboard
+                                <a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                                    <i class="ti ti-home me-3 fs-5 fa-solid fa-house"></i>
+                                    <span class="d-none d-md-inline ">
+                                        Dashboard</span>
                                 </a>
-                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('products.*') ? 'active' : '' }}" href="{{ route('products.index') }}">
-                                    <i class="ti ti-box me-3 fs-5"></i> Products
+                                <a class="nav-link text-dark  d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('products.*') ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                    <i class="ti ti-box me-3 fs-5 fa-solid fa-box"></i>
+                                    <span class="d-none d-md-inline">
+                                        Products</span>
                                 </a>
-                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('customers.*') ? 'active' : '' }}" href="{{ route('customers.index') }}">
-                                    <i class="ti ti-users me-3 fs-5"></i> Customers
+                               <!--<a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('customers.*') ? 'active' : '' }}" href="{{ route('customers.index') }}">
+                                    <i class="ti ti-users me-3 fs-5 fa-solid fa-users"></i>
+                                    <span class="d-none d-md-inline">
+                                        Customers</span> -->
                                 </a>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
-                                        <i class="ti ti-archive me-3 fs-5"></i> Inventory
+                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                        <i class="ti ti-archive me-3 fs-5 fa-solid fa-chart-simple"></i>
+                                        <span class="d-none d-md-inline">
+                                            Inventory</span>
                                     </a>
                                     <div class="dropdown-menu ps-4">
-                                        <a class="dropdown-item py-2" href="{{ route('products.index') }}"><i class="ti ti-list me-2"></i> Stock List</a>
-                                        <a class="dropdown-item py-2" href="{{ route('suppliers.index') }}"><i class="ti ti-truck me-2"></i> Suppliers</a>
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-rotate me-2"></i> Returns</a>
+                                        <a class="dropdown-item py-2" href="{{ route('products.index') }}"><i class="ti ti-list me-2 fa-solid fa-list"></i> Stock List</a>
+                                        <a class="dropdown-item py-2" href="{{ route('suppliers.index') }}"><i class="ti ti-truck me-2 fa-solid fa-truck "></i> Suppliers</a>
+                                        <!--<a class="dropdown-item py-2" href="#"><i class="ti ti-rotate me-2 fa-solid fa-rotate"></i> Returns</a> -->
                                     </div>
                                 </div>
-                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('orders.*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
-                                    <i class="ti ti-point me-3 fs-5"></i> Point of Sale
+                                <a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('orders.*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
+                                    <i class="ti ti-point me-3 fs-5 fa-solid fa-cash-register"></i>
+                                    <span class="d-none d-md-inline">
+                                        Point of Sale</span>
                                 </a>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
-                                        <i class="ti ti-report me-3 fs-5"></i> Reports
+                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                        <i class="ti ti-report me-3 fs-5 fa-solid fa-chart-simple"></i>
+                                        <span class="d-none d-md-inline">
+                                            Reports</span>
                                     </a>
                                     <div class="dropdown-menu ps-4">
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-chart-bar me-2"></i> Sales Report</a>
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-chart-pie me-2"></i> Inventory Reports</a>
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-users-group me-2"></i> Customers Reports</a>
+                                        <a class="dropdown-item py-2" href="{{ route('sales.report') }}">
+                                            <i class="ti ti-chart-bar me-2 fa-solid fa-chart-simple"></i> Sales Report
+                                        </a>
+                                        <a class="dropdown-item py-2" href="{{ route('invoices.report') }}">
+                                            <i class="ti ti-file-invoice me-2 fa-solid fa-file-invoice"></i> Invoice Report
+                                        </a>
+                                        <!--<a class="dropdown-item py-2" href="#"><i class="ti ti-users-group me-2 fa-solid fa-users"></i> Customers Reports</a> -->
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
-                                        <i class="ti ti-credit-card me-3 fs-5"></i> Accounts
+                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                        <i class="ti ti-credit-card me-3 fs-5 fa-solid fa-money-bill"></i>
+                                        <span class="d-none d-md-inline">
+                                            Accounts</span>
                                     </a>
                                     <div class="dropdown-menu ps-4">
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-cash me-2"></i> Expenses</a>
-                                        <a class="dropdown-item py-2" href="{{ route('quotations.index') }}"><i class="ti ti-file-invoice me-2"></i> Invoices</a>
+                                        <a class="dropdown-item py-2" href="{{ route('expenses.index') }}"><i class="ti ti-cash me-2 fa-solid fa-cash-register"></i> Expenses</a>
+                                        <a class="dropdown-item py-2" href="{{ route('quotations.index') }}"><i class="ti ti-file-invoice me-2 fa-solid fa-file-invoice"></i> Invoices</a>
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown mt-2">
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
-                                        <i class="ti ti-settings me-3 fs-5"></i> Settings
+                                    <a class="nav-link  text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                        <i class="ti ti-settings me-3 fs-5 fa-solid fa-gears"></i>
+                                        <span class="d-none d-md-inline">
+                                            Settings</span>
                                     </a>
                                     <div class="dropdown-menu ps-4">
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-sliders me-2"></i> General Settings</a>
-                                        <a class="dropdown-item py-2" href="{{ route('admin.users.index') }}"><i class="ti ti-user-cog me-2"></i> Users</a>
-                                        <a class="dropdown-item py-2" href="{{ route('admin.roles.index') }}"><i class="ti ti-id me-2"></i> Roles</a>
-                                        <a class="dropdown-item py-2" href="#"><i class="ti ti-bell me-2"></i> Notification Settings</a>
+                                        <a class="dropdown-item py-2" href="{{ route('settings.edit') }}"><i class="fa-solid fa-gears me-2"></i> General Settings</a>
+                                        <a class="dropdown-item py-2" href="{{ route('admin.users.index') }}"><i class="ti ti-user-cog me-2 fa-solid fa-user-cog"></i> Users</a>
+                                        <a class="dropdown-item py-2" href="{{ route('admin.roles.index') }}"><i class="ti ti-id me-2 fa-solid fa-id-card"></i> Roles</a>
+                                        <!--<a class="dropdown-item py-2" href="#"><i class="ti ti-bell me-2 fa-solid fa-bell"></i> Notification Settings</a> -->
                                     </div>
                                 </div>
                             </nav>

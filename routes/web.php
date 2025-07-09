@@ -18,7 +18,9 @@ use App\Http\Controllers\Quotation\QuotationController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\Product\ProductExportController;
 use App\Http\Controllers\Product\ProductImportController;
-use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/search', [DashboardController::class, 'search'])->name('dashboard.search');
 
     // Admin Routes
     Route::middleware(['auth', 'role:Administrator'])->prefix('admin')->name('admin.')->group(function () {
@@ -107,6 +110,50 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchases.edit');
     Route::put('/purchases/{purchase}/edit', [PurchaseController::class, 'update'])->name('purchases.update');
     Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.delete');
+
+    // Sales Report
+    Route::get('/sales/report', [SalesController::class, 'report'])->name('sales.report');
+    Route::get('/sales/report/export/pdf', [SalesController::class, 'exportPdf'])->name('sales.report.export.pdf');
+
+    // Invoice Report
+    Route::get('/invoices/report', [InvoiceController::class, 'report'])->name('invoices.report');
+    Route::get('/invoices/report/export/pdf', [InvoiceController::class, 'exportPdf'])->name('invoices.report.export.pdf');
+
+    // Expenses Routes
+    Route::prefix('expenses')->group(function () {
+        // Basic CRUD routes
+        Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
+        Route::get('/create', [ExpenseController::class, 'create'])->name('expenses.create');
+        Route::post('/', [ExpenseController::class, 'store'])->name('expenses.store');
+        Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
+        Route::get('/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
+        Route::put('/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
+        Route::delete('/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+        // Report routes
+        Route::get('/report/daily', [ExpenseController::class, 'dailyReport'])->name('expenses.report.daily');
+        Route::get('/report/monthly', [ExpenseController::class, 'monthlyReport'])->name('expenses.report.monthly');
+        Route::get('/report/yearly', [ExpenseController::class, 'yearlyReport'])->name('expenses.report.yearly');
+        Route::get('/report/custom', [ExpenseController::class, 'customReport'])->name('expenses.report.custom');
+        
+        // Export routes
+        Route::get('/report/export/pdf', [ExpenseController::class, 'exportPdf'])->name('expenses.report.export.pdf');
+        Route::get('/report/export/excel', [ExpenseController::class, 'exportExcel'])->name('expenses.report.export.excel');
+        
+        // Approval routes
+        Route::put('/{expense}/approve', [ExpenseController::class, 'approve'])->name('expenses.approve');
+        Route::put('/{expense}/reject', [ExpenseController::class, 'reject'])->name('expenses.reject');
+        
+        // Category routes
+        Route::get('/categories', [ExpenseController::class, 'categories'])->name('expenses.categories');
+        Route::post('/categories', [ExpenseController::class, 'storeCategory'])->name('expenses.categories.store');
+        Route::put('/categories/{category}', [ExpenseController::class, 'updateCategory'])->name('expenses.categories.update');
+        Route::delete('/categories/{category}', [ExpenseController::class, 'destroyCategory'])->name('expenses.categories.destroy');
+    });
+
+    // General Settings
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
 });
 
 require __DIR__.'/auth.php';

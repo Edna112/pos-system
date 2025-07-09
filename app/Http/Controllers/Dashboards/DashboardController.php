@@ -9,6 +9,9 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Quotation;
+use App\Models\Expense;
+use App\Models\Customer;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -34,6 +37,17 @@ class DashboardController extends Controller
             ->get()
             ->count();
 
+        // Calculate total expenses for the last month
+        $totalExpenses = Expense::whereBetween('expense_date', [now()->subMonth(), now()])
+            ->sum('amount');
+
+        // Calculate the date range for the last 30 days
+        $endDate = now();
+        $startDate = now()->copy()->subDays(30);
+
+        // Format as '14th Feb' etc.
+        $dateRange = $startDate->format('jS M') . ' to ' . $endDate->format('jS M');
+
         return view('dashboard', [
             'products' => $products,
             'orders' => $orders,
@@ -43,6 +57,21 @@ class DashboardController extends Controller
             'categories' => $categories,
             'quotations' => $quotations,
             'todayQuotations' => $todayQuotations,
+            'dateRange' => $dateRange,
+            'totalExpenses' => number_format($totalExpenses, 2),
         ]);
     }
+
+    /*public function search(Request $request)
+    {
+        $q = $request->input('q');
+        $products = Product::where('name', 'like', "%$q%")->limit(5)->get();
+        $orders = Order::where('invoice_no', 'like', "%$q%")->orWhere('id', $q)->limit(5)->get();
+        $customers = Customer::where('name', 'like', "%$q%")
+            ->orWhere('email', 'like', "%$q%")
+            ->orWhere('phone', 'like', "%$q%")
+            ->limit(5)->get();
+
+        return view('dashboard.search-results', compact('products', 'orders', 'customers'))->render(); 
+    }*/
 }

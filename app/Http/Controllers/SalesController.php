@@ -2,28 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Invoice\StoreInvoiceRequest;
-use App\Models\Customer;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\Sale;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 
-class InvoiceController extends Controller
+class SalesController extends Controller
 {
-    public function create(StoreInvoiceRequest $request, Customer $customer)
-    {
-        $customer = Customer::query()
-            ->where('id', $request->get('customer_id'))
-            ->first();
-
-        return view('invoices.index', [
-            'customer' => $customer,
-            'carts' => Cart::instance('order')->content(),
-        ]);
-    }
-
     public function report(Request $request)
     {
         $period = $request->input('period', 'monthly');
@@ -48,10 +32,10 @@ class InvoiceController extends Controller
                 $end = $customEnd ?? now()->toDateString();
         }
 
-        $orders = Order::whereBetween('created_at', [$start, $end])->with('customer')->get();
+        $sales = Sale::whereBetween('created_at', [$start, $end])->with('user')->get();
 
-        return view('invoices.report', [
-            'orders' => $orders,
+        return view('sales.report', [
+            'sales' => $sales,
             'start' => $start,
             'end' => $end,
             'period' => $period,
@@ -64,16 +48,18 @@ class InvoiceController extends Controller
         $start = $request->input('start_date');
         $end = $request->input('end_date');
 
-        $orders = Order::whereBetween('created_at', [$start, $end])->with('customer')->get();
+        // Use your existing date logic here if needed
 
-        $pdf = Pdf::loadView('invoices.report-pdf', [
-            'orders' => $orders,
+        $sales = \App\Models\Sale::whereBetween('created_at', [$start, $end])->with('user')->get();
+
+        $pdf = Pdf::loadView('sales.report-pdf', [
+            'sales' => $sales,
             'start' => $start,
             'end' => $end,
             'period' => $period,
         ]);
 
-        $filename = 'invoice-report-' . $period . '-' . $start . '-to-' . $end . '.pdf';
+        $filename = 'sales-report-' . $period . '-' . $start . '-to-' . $end . '.pdf';
         return $pdf->download($filename);
     }
 }

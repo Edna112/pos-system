@@ -1,30 +1,25 @@
 <div class="card">
-    <div class="card-header">
-        <div>
-            <h3 class="card-title">
-                {{ __('Products') }}
-            </h3>
-        </div>
-
-        <div class="card-actions btn-group">
-            <div class="dropdown">
-                <a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <x-icon.vertical-dots/>
+    <div class="card-header d-flex align-items-center">
+        <h3 class="card-title mb-0 me-2">
+            {{ __('Products') }}
+        </h3>
+        <div class="dropdown">
+            <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a href="{{ route('products.create') }}" class="dropdown-item">
+                    <x-icon.plus/>
+                    {{ __('Create Product') }}
                 </a>
-                <div class="dropdown-menu dropdown-menu-end" style="">
-                    <a href="{{ route('products.create') }}" class="dropdown-item">
-                        <x-icon.plus/>
-                        {{ __('Create Product') }}
-                    </a>
-                    <a href="{{ route('products.import.view') }}" class="dropdown-item">
-                        <x-icon.plus/>
-                        {{ __('Import Products') }}
-                    </a>
-                    <a href="{{ route('products.export.store') }}" class="dropdown-item">
-                        <x-icon.plus/>
-                        {{ __('Export Products') }}
-                    </a>
-                </div>
+                <a href="{{ route('products.import.view') }}" class="dropdown-item">
+                    <x-icon.plus/>
+                    {{ __('Import Products') }}
+                </a>
+                <a href="{{ route('products.export.store') }}" class="dropdown-item">
+                    <x-icon.plus/>
+                    {{ __('Export Products') }}
+                </a>
             </div>
         </div>
     </div>
