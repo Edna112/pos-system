@@ -74,4 +74,14 @@ class Product extends Model
         $query->where('name', 'like', "%{$value}%")
             ->orWhere('code', 'like', "%{$value}%");
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(\App\Models\OrderDetails::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(\App\Models\Order::class, 'order_details');
+    }
 }

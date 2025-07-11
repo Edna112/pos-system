@@ -28,7 +28,7 @@
         <div class="container container-tight py-4">
             <div class="text-center mb-4">
                 <a href="{{ url('/') }}" class="navbar-brand navbar-brand-autodark">
-                    <img src="{{ asset('assets/img/super-u-logo.png') }}" width="150" height="48" alt="Super U" class="navbar-brand-image">
+                    <img src="{{ asset('assets/img/super-u-logo.png') }}" width="300" height="100" alt="Super U" class="navbar-brand-image">
                 </a>
             </div>
 

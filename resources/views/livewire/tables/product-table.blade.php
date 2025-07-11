@@ -5,7 +5,7 @@
         </h3>
         <div class="dropdown">
             <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Add <i class="fa fa-caret-down"></i>
+                Add <i></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
                 <a href="{{ route('products.create') }}" class="dropdown-item">

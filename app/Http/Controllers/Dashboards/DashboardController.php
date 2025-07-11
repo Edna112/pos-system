@@ -11,6 +11,7 @@ use App\Models\Purchase;
 use App\Models\Quotation;
 use App\Models\Expense;
 use App\Models\Customer;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -48,6 +49,13 @@ class DashboardController extends Controller
         // Format as '14th Feb' etc.
         $dateRange = $startDate->format('jS M') . ' to ' . $endDate->format('jS M');
 
+        // Example: Get top 3 selling products (adjust logic as needed)
+        $topProducts = Product::withSum('orderDetails as total_sales', 'quantity')
+            ->orderByDesc('total_sales')
+            ->take(3)
+            ->get();
+
+
         return view('dashboard', [
             'products' => $products,
             'orders' => $orders,
@@ -59,7 +67,12 @@ class DashboardController extends Controller
             'todayQuotations' => $todayQuotations,
             'dateRange' => $dateRange,
             'totalExpenses' => number_format($totalExpenses, 2),
+            'topProducts' => $topProducts,
         ]);
+    }
+    public function Charts() {
+        
+
     }
 
     /*public function search(Request $request)

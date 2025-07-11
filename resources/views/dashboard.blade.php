@@ -2,7 +2,7 @@
 <head> <script src="https://kit.fontawesome.com/bdd56f4c49.js" crossorigin="anonymous"></script></head>
 @section('content')
 <div class="container-xl py-3">
-    <h3 class="mb-3"><i class="fa-solid fa-house me-2" style="color: #206bc4; font-size: 1.5rem; display: inline-block;"></i>Dashboard</h3>
+    <h3 class="mb-3"><i class="fa-solid fa-house me-2" style="color:#58a1b8; font-size: 1.5rem; display: inline-block;"></i>Dashboard</h3>
     <div class="alert alert-dark rounded-4 mb-4">
         Welcome, {{ Auth::user()->name ?? 'User' }}! Glad to see you on your Super U dashboard.
     </div>
@@ -169,24 +169,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Product A</td>
-                                <td>120</td>
-                                <td>50</td>
-                                <td>2025-12-31</td>
-                            </tr>
-                            <tr>
-                                <td>Product B</td>
-                                <td>80</td>
-                                <td>30</td>
-                                <td>2025-10-15</td>
-                            </tr>
-                            <tr>
-                                <td>Product C</td>
-                                <td>60</td>
-                                <td>20</td>
-                                <td>2025-08-20</td>
-                            </tr>
+                            @forelse($topProducts as $product)
+                                <tr>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->total_sales ?? 0 }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product->expiry_date ?? 'N/A' }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">No products found</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -203,8 +197,8 @@
         // Pie Chart
         var pieOptions = {
             chart: { type: 'pie', height: 250 },
-            labels: ['Click', 'Active', 'Not Recognized', 'Bot Activity'],
-            series: [35, 45, 10, 10],
+            labels: ['Products', 'Orders'],
+            series: @json([$products, $orders]),
             colors: ['#206bc4', '#28a745', '#ffc107', '#dc3545'],
             legend: { position: 'bottom' },
         };
@@ -216,7 +210,7 @@
             chart: { type: 'line', height: 250 },
             series: [{
                 name: 'Shopping Status',
-                data: [10, 20, 15, 30, 25, 40, 35]
+                data: [30,50,40]
             }],
             xaxis: {
                 categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -227,7 +221,7 @@
         lineChart.render();
     });
 
-    document.getElementById('dashboard-search-form').addEventListener('submit', function(e) {
+    /*document.getElementById('dashboard-search-form').addEventListener('submit', function(e) {
         e.preventDefault();
         let query = document.getElementById('dashboard-search-input').value;
         let resultsDiv = document.getElementById('dashboard-search-results');
@@ -242,6 +236,6 @@
         .catch(() => {
             resultsDiv.innerHTML = '<div class="text-danger">Error searching. Please try again.</div>';
         });
-    });
+    }); */
 </script>
 @endpush

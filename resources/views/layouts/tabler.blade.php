@@ -18,15 +18,17 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
-        /* Sidebar red hover */
+        /* Sidebar blue hover */
         .sidebar-menu-custom .nav-link:hover, .sidebar-menu-custom .dropdown-item:hover {
-            background: #4169E1 !important;
+            background:#ed1f29 !important;
             color: #fff !important;
         }
         .sidebar-menu-custom .nav-link:hover i,
         .sidebar-menu-custom .dropdown-item:hover i {
             color: #fff !important;
         }
+
+
     </style>
 
     <!-- Custom CSS for specific page.  -->
@@ -47,7 +49,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Sidebar -->
-                        <div class="col-md-2 d-none d-md-block bg-info min-vh-100 px-0 border-end sidebar-menu-custom" style="background: #f2f3f5;">
+                        <div class="col-md-2 d-none d-md-block bg-in min-vh-100 px-0 border-end sidebar-menu-custom" style="background:#58a1b8;">
                             <nav class="nav flex-column nav-pills gap-1 pt-4">
                                 <a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                     <i class="ti ti-home me-3 fs-5 fa-solid fa-house"></i>
