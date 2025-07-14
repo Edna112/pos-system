@@ -55,6 +55,24 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
+        // For the current month
+        $monthlyRevenue = Order::where('order_status', 'COMPLETE')
+            ->whereMonth('order_date', now()->month)
+            ->whereYear('order_date', now()->year)
+            ->sum('total');
+
+        $monthlyExpenses = Expense::whereMonth('expense_date', now()->month)
+            ->whereYear('expense_date', now()->year)
+            ->sum('amount');
+
+        // For the current year
+        $yearlyRevenue = Order::where('order_status', 'COMPLETE')
+            ->whereYear('order_date', now()->year)
+            ->sum('total');
+
+        $yearlyExpenses = Expense::whereYear('expense_date', now()->year)
+            ->sum('amount');
+
 
         return view('dashboard', [
             'products' => $products,
@@ -68,6 +86,10 @@ class DashboardController extends Controller
             'dateRange' => $dateRange,
             'totalExpenses' => number_format($totalExpenses, 2),
             'topProducts' => $topProducts,
+            'monthlyRevenue' => $monthlyRevenue,
+            'monthlyExpenses' => $monthlyExpenses,
+            'yearlyRevenue' => $yearlyRevenue,
+            'yearlyExpenses' => $yearlyExpenses,
         ]);
     }
     public function Charts() {

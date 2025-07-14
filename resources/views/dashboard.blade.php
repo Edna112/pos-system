@@ -150,12 +150,12 @@
             <x-card.index title="Recent Activity">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div>
-                        <button class="btn btn-sm btn-outline-primary">Month</button>
-                        <button class="btn btn-sm btn-outline-secondary">Year</button>
+                        <button class="btn btn-sm btn-outline-primary" id="show-month">Month</button>
+                        <button class="btn btn-sm btn-outline-secondary" id="show-year">Year</button>
                     </div>
-                    <div>
-                        <div class="me-3">Revenue: <strong>FCFA 12,345</strong></div>
-                        <div>Expenses: <strong>FCFA 6,789</strong></div>
+                    <div id="revenue-expenses">
+                        <div class="me-3">Revenue: <strong id="revenue">FCFA {{ number_format($monthlyRevenue) }}</strong></div>
+                        <div>Expenses: <strong id="expenses">FCFA {{ number_format($monthlyExpenses) }}</strong></div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -219,6 +219,27 @@
         };
         var lineChart = new ApexCharts(document.querySelector('#lineChart'), lineOptions);
         lineChart.render();
+
+        const monthBtn = document.getElementById('show-month');
+        const yearBtn = document.getElementById('show-year');
+        const revenue = document.getElementById('revenue');
+        const expenses = document.getElementById('expenses');
+
+        // These values are rendered from PHP
+        const monthlyRevenue = "{{ number_format($monthlyRevenue) }}";
+        const monthlyExpenses = "{{ number_format($monthlyExpenses) }}";
+        const yearlyRevenue = "{{ number_format($yearlyRevenue) }}";
+        const yearlyExpenses = "{{ number_format($yearlyExpenses) }}";
+
+        monthBtn.addEventListener('click', function() {
+            revenue.textContent = 'FCFA ' + monthlyRevenue;
+            expenses.textContent = 'FCFA ' + monthlyExpenses;
+        });
+
+        yearBtn.addEventListener('click', function() {
+            revenue.textContent = 'FCFA ' + yearlyRevenue;
+            expenses.textContent = 'FCFA ' + yearlyExpenses;
+        });
     });
 
     /*document.getElementById('dashboard-search-form').addEventListener('submit', function(e) {

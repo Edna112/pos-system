@@ -28,6 +28,45 @@
             color: #fff !important;
         }
 
+        /* Header and Logo Styles */
+        .navbar {
+            background: linear-gradient(135deg, #58a1b8 0%, #4a90a8 100%) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid #ed1f29;
+        }
+
+        .navbar-brand {
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-brand-image {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand-image:hover {
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        /* User menu styles */
+        .nav-item.dropdown .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .nav-item.dropdown .nav-link:hover {
+            color: #ed1f29 !important;
+        }
+
+        .avatar {
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
     </style>
 
