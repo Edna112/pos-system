@@ -18,14 +18,67 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
-        /* Sidebar blue hover */
-        .sidebar-menu-custom .nav-link:hover, .sidebar-menu-custom .dropdown-item:hover {
-            background:#ed1f29 !important;
-            color: #fff !important;
+        
+        /* SIDEBAR STYLES - UPDATED 2024 */
+        /* Force sidebar link colors with maximum specificity */
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link,
+        .sidebar-menu-custom .nav-link {
+            color: #000000 !important;
+            font-weight: 700 !important;
+            transition: all 0.3s ease !important;
         }
-        .sidebar-menu-custom .nav-link:hover i,
+
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link i,
+        .sidebar-menu-custom .nav-link i {
+            color: #000000 !important;
+        }
+
+        /* Active state */
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link.active,
+        .sidebar-menu-custom .nav-link.active {
+            background: #ed1f29 !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+            margin: 0 8px !important;
+        }
+
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link.active i,
+        .sidebar-menu-custom .nav-link.active i {
+            color: #ffffff !important;
+        }
+
+        /* Hover state */
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link:hover,
+        .sidebar-menu-custom .nav-link:hover {
+            background: #ed1f29 !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+            margin: 0 8px !important;
+            transform: translateX(5px) !important;
+        }
+
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .nav-link:hover i,
+        .sidebar-menu-custom .nav-link:hover i {
+            color: #ffffff !important;
+        }
+
+        /* Dropdown items */
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .dropdown-item,
+        .sidebar-menu-custom .dropdown-item {
+            color: #000000 !important;
+            font-weight: 600 !important;
+        }
+
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .dropdown-item:hover,
+        .sidebar-menu-custom .dropdown-item:hover {
+            background: #ed1f29 !important;
+            color: #ffffff !important;
+            border-radius: 4px !important;
+        }
+
+        .page .page-wrapper .container-fluid .row .sidebar-menu-custom .dropdown-item:hover i,
         .sidebar-menu-custom .dropdown-item:hover i {
-            color: #fff !important;
+            color: #ffffff !important;
         }
 
         /* Header and Logo Styles */
@@ -88,25 +141,25 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Sidebar -->
-                        <div class="col-md-2 d-none d-md-block bg-in min-vh-100 px-0 border-end sidebar-menu-custom" style="background:#58a1b8;">
+                        <div class="col-md-2 d-none d-md-block bg-in min-vh-100 px-0 border-end sidebar-menu-custom" style="background:#58a1b8; border: 3px solid red !important;">
                             <nav class="nav flex-column nav-pills gap-1 pt-4">
-                                <a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                     <i class="ti ti-home me-3 fs-5 fa-solid fa-house"></i>
                                     <span class="d-none d-md-inline ">
                                         Dashboard</span>
                                 </a>
-                                <a class="nav-link text-dark  d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('products.*') ? 'active' : '' }}" href="{{ route('products.index') }}">
+                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('products.*') ? 'active' : '' }}" href="{{ route('products.index') }}">
                                     <i class="ti ti-box me-3 fs-5 fa-solid fa-box"></i>
                                     <span class="d-none d-md-inline">
                                         Products</span>
                                 </a>
-                               <!--<a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('customers.*') ? 'active' : '' }}" href="{{ route('customers.index') }}">
+                               <!--<a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('customers.*') ? 'active' : '' }}" href="{{ route('customers.index') }}">
                                     <i class="ti ti-users me-3 fs-5 fa-solid fa-users"></i>
                                     <span class="d-none d-md-inline">
                                         Customers</span> -->
                                 </a>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                         <i class="ti ti-archive me-3 fs-5 fa-solid fa-chart-simple"></i>
                                         <span class="d-none d-md-inline">
                                             Inventory</span>
@@ -117,13 +170,13 @@
                                         <!--<a class="dropdown-item py-2" href="#"><i class="ti ti-rotate me-2 fa-solid fa-rotate"></i> Returns</a> -->
                                     </div>
                                 </div>
-                                <a class="nav-link text-dark d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('orders.*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
+                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('orders.*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
                                     <i class="ti ti-point me-3 fs-5 fa-solid fa-cash-register"></i>
                                     <span class="d-none d-md-inline">
                                         Point of Sale</span>
                                 </a>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                         <i class="ti ti-report me-3 fs-5 fa-solid fa-chart-simple"></i>
                                         <span class="d-none d-md-inline">
                                             Reports</span>
@@ -139,7 +192,7 @@
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                         <i class="ti ti-credit-card me-3 fs-5 fa-solid fa-money-bill"></i>
                                         <span class="d-none d-md-inline">
                                             Accounts</span>
@@ -150,7 +203,7 @@
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown mt-2">
-                                    <a class="nav-link  text-dark dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                         <i class="ti ti-settings me-3 fs-5 fa-solid fa-gears"></i>
                                         <span class="d-none d-md-inline">
                                             Settings</span>
