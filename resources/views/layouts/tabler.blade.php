@@ -98,8 +98,8 @@
         }
 
         .navbar-brand-image {
-            width: 140px !important;
-            height: 48px !important;
+            width: 130px !important;
+            height: 40px !important;
             max-width: none !important;
             max-height: none !important;
         }

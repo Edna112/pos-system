@@ -131,7 +131,7 @@
         </div>
         <div class="col-md-6">
             <x-card.index title="Shopping Status">
-                <div id="lineChart" style="height: 250px;"></div>
+                <div id="lineChart" style="height: 250px; width: 100%;"></div>
                 <div class="text-center mt-2 small">
                     <span class="me-2">Mon</span>
                     <span class="me-2">Tue</span>
@@ -207,15 +207,34 @@
 
         // Line Chart
         var lineOptions = {
-            chart: { type: 'line', height: 250 },
+            chart: {
+                type: 'line',
+                height: 250,
+                width: '100%',
+                toolbar: { show: false },
+                animations: { enabled: true }
+            },
             series: [{
-                name: 'Shopping Status',
-                data: [30,50,40]
+                name: 'Orders',
+                data: @json($ordersData)
             }],
             xaxis: {
-                categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                categories: @json($days)
             },
             colors: ['#206bc4'],
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    chart: { height: 200 },
+                    legend: { position: 'bottom' }
+                }
+            }, {
+                breakpoint: 480,
+                options: {
+                    chart: { height: 150 },
+                    legend: { position: 'bottom' }
+                }
+            }]
         };
         var lineChart = new ApexCharts(document.querySelector('#lineChart'), lineOptions);
         lineChart.render();

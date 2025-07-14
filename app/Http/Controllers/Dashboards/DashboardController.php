@@ -13,6 +13,7 @@ use App\Models\Expense;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -73,6 +74,22 @@ class DashboardController extends Controller
         $yearlyExpenses = Expense::whereYear('expense_date', now()->year)
             ->sum('amount');
 
+        // Get order counts for each day of the current week
+        $ordersPerDay = Order::select(
+            DB::raw('DAYNAME(order_date) as day'),
+            DB::raw('COUNT(*) as count')
+        )
+        ->whereBetween('order_date', [now()->startOfWeek(), now()->endOfWeek()])
+        ->groupBy('day')
+        ->pluck('count', 'day')
+        ->toArray();
+
+        // Ensure all days are present (Mon-Sun)
+        $days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+        $ordersData = [];
+        foreach ($days as $day) {
+            $ordersData[] = $ordersPerDay[$day] ?? 0;
+        }
 
         return view('dashboard', [
             'products' => $products,
@@ -90,6 +107,8 @@ class DashboardController extends Controller
             'monthlyExpenses' => $monthlyExpenses,
             'yearlyRevenue' => $yearlyRevenue,
             'yearlyExpenses' => $yearlyExpenses,
+            'ordersData' => $ordersData,
+            'days' => ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
         ]);
     }
     public function Charts() {
