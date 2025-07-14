@@ -98,12 +98,10 @@
         }
 
         .navbar-brand-image {
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand-image:hover {
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            width: 140px !important;
+            height: 48px !important;
+            max-width: none !important;
+            max-height: none !important;
         }
 
         /* User menu styles */
