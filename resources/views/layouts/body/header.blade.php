@@ -5,11 +5,23 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{{ url('/') }}">
-                <img src="{{ asset('assets/img/super-u-logo-(1).png') }}" width="120" height="42" alt="Super U" class="navbar-brand-image">
+                <img src="{{ asset('assets/img/super-u-logo-(1).png') }}" width="110" height="32" alt="Super U" class="navbar-brand-image">
             </a>
         </h1>
 
-        <div class="navbar-nav flex-row order-md-last">
+        <div class="navbar-nav flex-row order-md-last align-items-center" style="gap: 0.5rem;">
+            <!-- Settings Icon -->
+            <a href="{{ route('profile.edit') }}" class="nav-link px-2 nav-icon-btn d-flex align-items-center" title="Account Settings" style="height: 40px;">
+                <i class="fas fa-cog"></i>
+            </a>
+            <!-- Logout Icon -->
+            <form action="{{ route('logout') }}" method="post" style="display: flex; align-items: center; margin: 0; padding: 0; height: 40px;">
+                @csrf
+                <button type="submit" class="nav-link px-2 nav-icon-btn d-flex align-items-center" title="Logout" style="background: none; border: none; padding: 0; margin: 0; height: 40px;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </form>
+            <!-- Avatar Dropdown (optional) -->
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                     <span class="avatar avatar-sm shadow-none"
@@ -20,20 +32,24 @@
                     </div>
                 </a>
 
-                <div class="dropdown-menu">
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-                        </svg>
-                        Account
+                <div class="dropdown-menu dropdown-menu-end text-center" style="min-width: 180px;">
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item py-3" style="font-size: 1.15rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                        <span style="font-size: 1.7rem; color: #4abdad; display: flex; align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon icon-tabler icon-tabler-settings" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+                                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                            </svg>
+                        </span>
+                        <span style="font-weight: 600;">Account</span>
                     </a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button type="submit" class="dropdown-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
-                            Logout
+                        <button type="submit" class="dropdown-item py-3" style="font-size: 1.15rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                            <span style="font-size: 1.7rem; color: #ed1f29; display: flex; align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon icon-tabler icon-tabler-logout" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                            </span>
+                            <span style="font-weight: 600;">Logout</span>
                         </button>
                     </form>
                 </div>
@@ -41,3 +57,49 @@
         </div>
     </div>
 </header>
+
+<style>
+.navbar-nav.flex-row.align-items-center > * {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.nav-icon-btn i {
+    font-size: 1.3rem;
+    border-radius: 50%;
+    padding: 0.25rem;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon-btn[title="Account Settings"] i {
+    color: #4abdad;
+    background: #e6f7f4;
+}
+
+.nav-icon-btn[title="Logout"] i {
+    color: #ed1f29;
+    background: #ffeaea;
+}
+
+.nav-icon-btn:hover i {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    color: #206bc4 !important;
+}
+
+@media (max-width: 600px) {
+    .dropdown-menu {
+        min-width: 100vw !important;
+        left: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
+    }
+    .dropdown-item {
+        font-size: 1.2rem !important;
+        padding: 1.5rem 0 !important;
+    }
+}
+</style>
