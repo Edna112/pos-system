@@ -162,3 +162,10 @@ Route::get('test/', function (){
 //    return view('test');
     return view('orders.create');
 });
+
+// POS-only routes for pos_attendant
+Route::middleware(['auth', 'posaccess'])->group(function () {
+    Route::get('/pos', [\App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
+    Route::get('/pos/products', [\App\Http\Controllers\PosController::class, 'products'])->name('pos.products');
+    // Add other POS routes here
+});

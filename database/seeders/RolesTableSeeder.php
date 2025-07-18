@@ -9,6 +9,8 @@ class RolesTableSeeder extends Seeder
 {
     public function run(): void
     {
-        Role::create(['name' => 'Administrator']);
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Administrator']);
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Pos attendant']);
+        // Add other roles as needed
     }
 } 

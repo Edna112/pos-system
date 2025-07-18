@@ -22,13 +22,18 @@
                             @error('description')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <div class="mb-3">
-                            <label for="permissions" class="form-label">Permissions</label>
-                            <select class="form-select @error('permissions') is-invalid @enderror" id="permissions" name="permissions[]" multiple required>
+                            <label class="form-label">Permissions</label>
+                            <div class="form-check-group">
                                 @foreach ($permissions as $permission)
-                                    <option value="{{ $permission->id }}" {{ in_array($permission->id, old('permissions', [])) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input @error('permissions') is-invalid @enderror" type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="perm_{{ $permission->id }}" {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="perm_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
                                 @endforeach
-                            </select>
-                            @error('permissions')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                @error('permissions')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                            </div>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">Cancel</a>
