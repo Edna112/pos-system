@@ -36,15 +36,6 @@
                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                         </div>
                         <div class="mb-3">
-                            <label for="user_role" class="form-label">User Type</label>
-                            <select class="form-select" id="user_role" name="role" required>
-                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="pos_attendant" {{ old('role') == 'pos_attendant' ? 'selected' : '' }}>POS Attendant</option>
-                                <option value="cashier" {{ old('role') == 'cashier' ? 'selected' : '' }}>Cashier</option>
-                                <!-- Add other user types as needed -->
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label for="roles" class="form-label">Roles</label>
                             <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles[]" multiple required>
                                 @foreach ($roles as $role)

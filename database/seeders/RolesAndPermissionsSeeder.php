@@ -69,6 +69,16 @@ class RolesAndPermissionsSeeder extends Seeder
                     'View Reports', 'Export Reports',
                 ]
             ],
+            'pos-attendant' => [
+                'name' => 'POS Attendant',
+                'description' => 'attends to all POS activities',
+                'permissions' => [
+                    'View Products',
+                    'View Sales',
+                    'Create Sales',
+                    'View Inventory'
+                ]
+            ],
             'cashier' => [
                 'name' => 'Cashier',
                 'description' => 'Can process sales and view inventory',

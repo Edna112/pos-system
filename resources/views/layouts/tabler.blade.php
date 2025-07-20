@@ -141,20 +141,20 @@
                         <!-- Sidebar -->
                         <div class="col-md-2 d-none d-md-block bg-in min-vh-100 px-0 border-end sidebar-menu-custom" style="background:#58a1b8;">
                             <nav class="nav flex-column nav-pills gap-1 pt-4">
-                                @if(Auth::check() && Auth::user()->role === 'pos_attendant')
-                                    <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('pos.index') ? 'active' : '' }}" href="{{ route('pos.index') }}">
-                                        <i class="ti ti-cash-register me-3 fs-5 fa-solid fa-cash-register"></i>
-                                        <span class="d-none d-md-inline">Point of Sale</span>
-                                    </a>
-                                @else
-                                    <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                                        <i class="ti ti-home me-3 fs-5 fa-solid fa-house"></i>
-                                        <span class="d-none d-md-inline">Dashboard</span>
-                                    </a>
+                                <!-- Dashboard - Show for all authenticated users -->
+                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                                    <i class="ti ti-home me-3 fs-5 fa-solid fa-house"></i>
+                                    <span class="d-none d-md-inline">Dashboard</span>
+                                </a>
+
+                                <!-- Products - Show for all users except POS Attendants -->
+                                @if(Auth::check() && !Auth::user()->hasRole('POS Attendant'))
                                     <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('products.*') ? 'active' : '' }}" href="{{ route('products.index') }}">
                                         <i class="ti ti-box me-3 fs-5 fa-solid fa-box"></i>
                                         <span class="d-none d-md-inline">Products</span>
                                     </a>
+                                    
+                                    <!-- Inventory - Show for all users except POS Attendants -->
                                     <div class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                             <i class="ti ti-archive me-3 fs-5 fa-solid fa-chart-simple"></i>
@@ -166,10 +166,14 @@
                                             <!-- Add more inventory links as needed -->
                                         </div>
                                     </div>
+                                    
+                                    <!-- Orders - Show for all users except POS Attendants -->
                                     <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('orders.*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
                                         <i class="ti ti-point me-3 fs-5 fa-solid fa-cash-register"></i>
                                         <span class="d-none d-md-inline">Orders</span>
                                     </a>
+                                    
+                                    <!-- Reports - Show for all users except POS Attendants -->
                                     <div class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                             <i class="ti ti-report me-3 fs-5 fa-solid fa-chart-simple"></i>
@@ -185,6 +189,8 @@
                                             <!-- Add more report links as needed -->
                                         </div>
                                     </div>
+                                    
+                                    <!-- Accounts - Show for all users except POS Attendants -->
                                     <div class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                             <i class="ti ti-credit-card me-3 fs-5 fa-solid fa-money-bill"></i>
@@ -196,10 +202,8 @@
                                             <!-- Add more account links as needed -->
                                         </div>
                                     </div>
-                                    <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('pos.index') ? 'active' : '' }}" href="{{ route('pos.index') }}">
-                                        <i class="ti ti-cash-register me-3 fs-5 fa-solid fa-cash-register"></i>
-                                        <span class="d-none d-md-inline">Point of Sale</span>
-                                    </a>
+                                    
+                                    <!-- Settings - Show for all users except POS Attendants -->
                                     <div class="nav-item dropdown mt-2">
                                         <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
                                             <i class="ti ti-settings me-3 fs-5 fa-solid fa-gears"></i>
@@ -213,6 +217,12 @@
                                         </div>
                                     </div>
                                 @endif
+
+                                <!-- Point of Sale - Show for all authenticated users -->
+                                <a class="nav-link d-flex align-items-center px-4 py-3 fw-semibold {{ request()->routeIs('pos.index') ? 'active' : '' }}" href="{{ route('pos.index') }}">
+                                    <i class="ti ti-cash-register me-3 fs-5 fa-solid fa-cash-register"></i>
+                                    <span class="d-none d-md-inline">Point of Sale</span>
+                                </a>
                             </nav>
                         </div>
                         <!-- Main Content -->

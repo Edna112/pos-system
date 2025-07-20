@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
-        if ($user->role === 'pos_attendant') {
+        if ($user->hasRole('POS Attendant')) {
             return redirect()->route('pos.index');
         }
         return redirect()->intended(RouteServiceProvider::HOME);
