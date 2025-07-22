@@ -38,93 +38,49 @@
         <x-spinner.loading-spinner/>
 
         <div class="table-responsive">
-            <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
-                <thead class="thead-light">
+            <table class="table">
+                <thead>
                     <tr>
-                        <th class="align-middle text-center w-1">
-                            {{ __('No.') }}
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('invoice_no')" href="#" role="button">
-                                {{ __('Invoice No.') }}
-                                @include('inclues._sort-icon', ['field' => 'invoice_no'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
-                                {{ __('Customer') }}
-                                @include('inclues._sort-icon', ['field' => 'customer_id'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('order_date')" href="#" role="button">
-                                {{ __('Date') }}
-                                @include('inclues._sort-icon', ['field' => 'order_date'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('payment_type')" href="#" role="button">
-                                {{ __('Paymet') }}
-                                @include('inclues._sort-icon', ['field' => 'payment_type'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('total')" href="#" role="button">
-                                {{ __('Total') }}
-                                @include('inclues._sort-icon', ['field' => 'total'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
-                                {{ __('Status') }}
-                                @include('inclues._sort-icon', ['field' => 'order_status'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            {{ __('Action') }}
-                        </th>
+                        <th>#</th>
+                        <th>Invoice No</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                @forelse ($orders as $order)
-                    <tr>
-                        <td class="align-middle text-center">
-                            {{ $loop->iteration }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $order->invoice_no }}
-                        </td>
-                        <td class="align-middle">
-                            {{ $order->customer->name }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $order->order_date->format('d-m-Y') }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $order->payment_type }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ Number::currency($order->total, 'XAF') }}
-                        </td>
-                        <td class="align-middle text-center">
-                            <x-status dot color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : 'orange' }}"
-                                      class="text-uppercase"
-                            >
-                                {{ $order->order_status->label() }}
-                            </x-status>
-                        </td>
-                        <td class="align-middle text-center" style="width: 5%">
-                            <x-button.show class="btn-icon" route="{{ route('orders.show', $order) }}"/>
-                            <x-button.print class="btn-icon" route="{{ route('order.downloadInvoice', $order) }}"/>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td class="align-middle text-center" colspan="8">
-                            No results found
-                        </td>
-                    </tr>
-                @endforelse
+                    @forelse ($orders as $order)
+                        <tr>
+                            <td class="align-middle text-center">{{ $loop->iteration }}</td>
+                            <td class="align-middle text-center">{{ $order->invoice_no }}</td>
+                            <td class="align-middle">{{ $order->customer->name }}</td>
+                            <td class="align-middle text-center">{{ $order->order_date->format('d-m-Y') }}</td>
+                            <td class="align-middle text-center">{{ $order->payment_type }}</td>
+                            <td class="align-middle text-center">{{ Number::currency($order->total, 'XAF') }}</td>
+                            <td class="align-middle text-center">
+                                <span class="badge 
+                                    {{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'bg-success' : 
+                                       ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'bg-warning' : 'bg-danger') }}">
+                                    {{ $order->order_status->label() }}
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <a href="{{ route('orders.show', $order) }}" class="btn btn-info btn-sm rounded-circle" title="View Order">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="{{ route('order.downloadInvoice', $order) }}" class="btn btn-success btn-sm rounded-circle" title="Download Invoice">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8" class="text-center">No orders found</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

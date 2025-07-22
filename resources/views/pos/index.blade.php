@@ -9,5 +9,9 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
+
+    <hr>
+    <h3>Recent Orders</h3>
+    <livewire:tables.order-table />
 </div>
 @endsection 

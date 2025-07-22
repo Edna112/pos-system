@@ -38,6 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'Create Sales', 'slug' => 'create-sales'],
             ['name' => 'Edit Sales', 'slug' => 'edit-sales'],
             ['name' => 'Delete Sales', 'slug' => 'delete-sales'],
+            ['name' => 'Download Invoice', 'slug' => 'download-invoice'],
             
             // Inventory Management
             ['name' => 'View Inventory', 'slug' => 'view-inventory'],
@@ -76,7 +77,8 @@ class RolesAndPermissionsSeeder extends Seeder
                     'View Products',
                     'View Sales',
                     'Create Sales',
-                    'View Inventory'
+                    'View Inventory',
+                    'Download Invoice'
                 ]
             ],
             'cashier' => [

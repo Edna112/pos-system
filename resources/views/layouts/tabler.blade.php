@@ -202,20 +202,6 @@
                                             <!-- Add more account links as needed -->
                                         </div>
                                     </div>
-                                    
-                                    <!-- Settings - Show for all users except POS Attendants -->
-                                    <div class="nav-item dropdown mt-2">
-                                        <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
-                                            <i class="ti ti-settings me-3 fs-5 fa-solid fa-gears"></i>
-                                            <span class="d-none d-md-inline">Settings</span>
-                                        </a>
-                                        <div class="dropdown-menu ps-4">
-                                            <a class="dropdown-item py-2" href="{{ route('settings.edit') }}"><i class="fa-solid fa-gears me-2"></i> General Settings</a>
-                                            <a class="dropdown-item py-2" href="{{ route('admin.users.index') }}"><i class="ti ti-user-cog me-2 fa-solid fa-user-cog"></i> Users</a>
-                                            <a class="dropdown-item py-2" href="{{ route('admin.roles.index') }}"><i class="ti ti-id me-2 fa-solid fa-id-card"></i> Roles</a>
-                                            <!-- Add more settings links as needed -->
-                                        </div>
-                                    </div>
                                 @endif
 
                                 <!-- Point of Sale - Show for all authenticated users -->
@@ -223,6 +209,19 @@
                                     <i class="ti ti-cash-register me-3 fs-5 fa-solid fa-cash-register"></i>
                                     <span class="d-none d-md-inline">Point of Sale</span>
                                 </a>
+                                <!-- Settings - Show for all users except POS Attendants -->
+                                <div class="nav-item dropdown mt-2">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center px-4 py-3 fw-semibold" data-bs-toggle="dropdown" href="#">
+                                        <i class="ti ti-settings me-3 fs-5 fa-solid fa-gears"></i>
+                                        <span class="d-none d-md-inline">Settings</span>
+                                    </a>
+                                    <div class="dropdown-menu ps-4">
+                                        <a class="dropdown-item py-2" href="{{ route('settings.edit') }}"><i class="fa-solid fa-gears me-2"></i> General Settings</a>
+                                        <a class="dropdown-item py-2" href="{{ route('admin.users.index') }}"><i class="ti ti-user-cog me-2 fa-solid fa-user-cog"></i> Users</a>
+                                        <a class="dropdown-item py-2" href="{{ route('admin.roles.index') }}"><i class="ti ti-id me-2 fa-solid fa-id-card"></i> Roles</a>
+                                        <!-- Add more settings links as needed -->
+                                    </div>
+                                </div>
                             </nav>
                         </div>
                         <!-- Main Content -->
